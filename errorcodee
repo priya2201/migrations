@@ -1,0 +1,145 @@
+//'use strict';
+
+/** @type {import('sequelize-cli').Migration} */
+// module.exports = {
+//   async up (queryInterface, Sequelize) {
+//     const transaction=await queryInterface.sequelize.transaction();
+//     try{
+//       await queryInterface.addColumn(
+//         'Person',
+//         'petfirstName',{
+//           type:Sequelize.DataTypes.STRING,
+//         },
+//         {transaction}
+//       );
+//       await queryInterface.addIndex(
+//         'Person',
+//         'petfirstName',{
+//           fields:'petfirstName',
+//           unique:true,
+//           transaction,
+//         }
+//       );
+//       await transaction.commit();
+
+//     }catch(err){
+//       await transaction.rollback();
+//       throw err;
+//     }
+//      /**
+//      * Add altering commands here.
+//      *
+//      * Example:
+//      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
+//      */
+//   },
+
+  // async down (queryInterface, Sequelize) {
+  //   const transaction=await queryInterface.sequelize.transaction();
+  //   try{
+  //     await queryInterface.removeColumn('Person','petfirstName',{
+  //       transaction
+  //     });
+  //     await transaction.commit();
+  //   }catch(err){
+  //     await transaction.rollback();
+  //     throw err;
+  //   }
+//     /**
+//      * Add reverting commands here.
+//      *
+//      * Example:
+//      * await queryInterface.dropTable('users');
+//      */
+//   }
+//};
+'use strict';
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up (queryInterface, Sequelize) {
+   const transaction=await queryInterface.sequelize.transaction();
+   try{
+    await queryInterface.addColumn(
+      'Person',
+      'PetPlace',
+      {
+        type:Sequelize.DataTypes.STRING,
+      },
+      {transaction}
+    );
+    await queryInterface.addIndex(
+      'Person',
+      'PetPlace',
+      {
+        fields:'PetPlace',
+        unique:true,
+        transaction,
+      }
+    );
+    await transaction.commit();
+    }
+    catch(err){
+      await transaction.rollback();
+      throw err;
+    }
+  },
+
+  async down (queryInterface, Sequelize) {
+ const transaction=await queryInterface.sequelize.transaction();
+ try{
+  await queryInterface.removeColumn('Person','PetPlace',{transaction});
+  await transaction.commit();
+ }catch(err){
+  await transaction.rollback();
+  throw err;
+ }
+  }
+};
+
+
+
+
+
+
+
+module.exports = {
+  async up(queryInterface,Sequelize){
+    const transaction = await queryInterface.sequelize.transaction();
+    try {
+      await queryInterface.addColumn(
+        'Person',
+        'petBirthPlace',
+        {
+          type: Sequelize.DataTypes.STRING,
+        },
+        { transaction }
+      );
+      await queryInterface.addIndex(
+        'Person',
+        'petBirthPlace',
+        {
+          fields: 'petBirthPlace',
+          unique: true,
+          transaction,
+        }
+      );
+      await transaction.commit();
+    } catch (err) {
+      await transaction.rollback();
+      throw err;
+    }
+  },
+
+  async down (queryInterface, Sequelize) {
+    const transaction = await queryInterface.sequelize.transaction();
+    try {
+      await queryInterface.removeColumn('Person', 'petBirthPlace', { transaction });
+      await transaction.commit();
+    } catch (err) {
+      await transaction.rollback();
+      throw err;
+    }
+  }
+};
+
